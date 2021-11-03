@@ -9,9 +9,7 @@ function save( JSON, checkSave, slot )
 	var fileName = ( slot == undefined || slot == 1 ) ? "cg_save.sf" : "cg_save".concat( "_", slot, ".sf" );
 	
 	var jsonStr2  = JSON.stringify(json);	
-	//Found a character that was making the encode fail
-	jsonStr2 = jsonStr2.replace("—","-");	
-	const outputStr = `${fileTkn[0]},${window.btoa(jsonStr2)}`;
+	const outputStr = `${fileTkn[0]},${window.btoa(unescape(encodeURIComponent(jsonStr2)))}`;
 		
 	const element = document.createElement('a');
 	element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(outputStr));
